@@ -113,7 +113,7 @@ void linkList<T>::remove(int i, T& e) {
 
 template <class T>
 void linkList<T>::reverse() { 
-    //这是不插入，反转的写法。也可以从头开始遍历，初始化链表为空，将每个节点插到头部，就反转了。
+    //这是不插入，反转的写法。也可以从头开始遍历，初始化链表为空，顺序将每个节点插到头部，就反转了。
     node<T> *p, *prev_p, *tmp;
     p = head->next;
     head->next = NULL;
