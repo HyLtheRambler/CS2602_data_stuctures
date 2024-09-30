@@ -29,9 +29,19 @@ int main() {
     } catch (const outOfBound& e) {
         std::cerr << "删除操作越界" << std::endl;
     }
-
+    
     // 打印链表内容
     list.print(); // 期望输出: 20 30 40 50 60 70 80 90
+    int k = 0;
+    try {
+        for (k = 1; k < 5; ++k) {
+            int value = list.getBackwardK(k);
+            std::cout << "The " << k << "rd element from the end is: " << value << std::endl;
+        }
+    } catch (const std::out_of_range& e) {
+        std::cerr << e.what() << std::endl;
+    }
+
 
     // 测试反转链表
     list.reverse();

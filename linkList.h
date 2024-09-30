@@ -36,6 +36,7 @@ class linkList
         void reverse(); //元素就地逆置
         void clear();
         void print();
+        T& getBackwardK(int k) const;
         ~linkList(){ clear(); };
 };
 
@@ -111,7 +112,8 @@ void linkList<T>::remove(int i, T& e) {
 }
 
 template <class T>
-void linkList<T>::reverse() {
+void linkList<T>::reverse() { 
+    //这是不插入，反转的写法。也可以从头开始遍历，初始化链表为空，将每个节点插到头部，就反转了。
     node<T> *p, *prev_p, *tmp;
     p = head->next;
     head->next = NULL;
@@ -135,6 +137,25 @@ void linkList<T>::clear() {
         ptr = tmp;
     }
     head->next = NULL;
+}
+
+template <class T>
+T& linkList<T>::getBackwardK(int k) const {
+    node<T> *fast_ptr = head->next;
+    node<T> *ptr = head;
+    int cur_index = 1;
+    while (fast_ptr && cur_index < k) {
+        fast_ptr = fast_ptr->next;
+        cur_index++;
+    }
+    if (!fast_ptr || k == 0) {
+        throw outOfBound();
+    }
+    while (fast_ptr) {
+        ptr = ptr->next;
+        fast_ptr = fast_ptr->next;
+    }
+    return ptr->data;
 }
 
 template <class T>
